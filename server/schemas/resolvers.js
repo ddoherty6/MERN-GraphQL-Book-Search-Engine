@@ -1,4 +1,4 @@
-
+/// executes database calls
 const resolvers = {
     Query: {
         me: async(parent, args, context) => {
@@ -20,6 +20,24 @@ const resolvers = {
         login: async(parent, args, context) => {
             if (context.email) {
                 console.log(context.email);
+                // args.email, args.password
+
+                // async login({ body }, res) { //////////////////////////////////////////////////////////////////////////// using args from mutation
+                //     const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
+                //     if (!user) {
+                //       return res.status(400).json({ message: "Can't find this user" });
+                //     }
+                
+                //     const correctPw = await user.isCorrectPassword(body.password);
+                
+                //     if (!correctPw) {
+                //       return res.status(400).json({ message: 'Wrong password!' });
+                //     }
+                //     const token = signToken(user);
+                //     res.json({ token, user });
+                //   },
+
+
             } else {
                 console.log("No context.email exists");
             }
