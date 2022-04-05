@@ -35,3 +35,15 @@ export const SAVE_BOOK = gql `
     }
 
 `;
+
+export const REMOVE_BOOK = gql `
+    mutation removeBook($authors: [String]!, $title: String!, $image: String, link: String) {
+        removeBook(username, $username, email: $email, password: $password) {
+            user {
+                _id
+                username
+            }
+        }
+    }
+
+`;
