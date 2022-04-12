@@ -45,14 +45,25 @@ const resolvers = {
             return { token, user };
         },
         saveBook: async(parent, args, context) => {
-            return fetch('/api/users', {
-                method: 'PUT',
-                headers: {
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${token}`,
+            console.log(args);
+            const user = User.findOneAndUpdate({email: "test13@test.com"}, 
+                {
+                    books: [ ...args]
                 },
-                body: JSON.stringify(bookData),
-            });
+                {
+                    new: true
+                });
+
+            return user;
+            // const user = User.findOne()
+            // return fetch('/api/users', {
+            //     method: 'PUT',
+            //     headers: {
+            //     'Content-Type': 'application/json',
+            //     authorization: `Bearer ${token}`,
+            //     },
+            //     body: JSON.stringify(bookData),
+            // });
         },
         removeBook: async(parent, args, context) => {
             if (context.bookId) {
