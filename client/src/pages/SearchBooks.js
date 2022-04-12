@@ -62,16 +62,18 @@ const SearchBooks = () => {
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
     // get token
-    //const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    // if (!token) {
-    //   return false;
-    // }
-
-    console.log(bookToSave);
+    if (!token) {
+      return false;
+    }
 
     try {
-      const response = await saveBook(bookToSave );
+      const response = await saveBook({
+          variables: {
+            bookData: { ...bookToSave }
+          } 
+        });
 
       if (!response.data.saveBook.token) {
         throw new Error('something went wrong!');

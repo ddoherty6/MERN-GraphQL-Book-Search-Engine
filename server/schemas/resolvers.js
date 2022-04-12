@@ -46,13 +46,21 @@ const resolvers = {
         },
         saveBook: async(parent, args, context) => {
             console.log(args);
-            const user = User.findOneAndUpdate({email: "test13@test.com"}, 
+            console.log(context);
+
+            const user = User.findOneAndUpdate(
                 {
-                    books: [ ...args]
+                    _id: context.user._id
+                },
+                {
+                    $push: {
+                        savedBooks: args.bookData
+                    }
                 },
                 {
                     new: true
-                });
+                }
+            );
 
             return user;
             // const user = User.findOne()
